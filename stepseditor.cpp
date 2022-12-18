@@ -1,7 +1,10 @@
 #include "stepseditor.h"
 #include "ui_stepseditor.h"
+#include "functions.h"
+#include "droplabel.h"
 #include <QLabel>
 #include <QLineEdit>
+#include <QPlainTextEdit>
 #include <QtSql>
 
 StepsEditor::StepsEditor(QWidget *parent) :
@@ -10,6 +13,7 @@ StepsEditor::StepsEditor(QWidget *parent) :
 {
     ui->setupUi(this);
     addStep();
+    setProperty("window",true);
 }
 
 StepsEditor::~StepsEditor()
@@ -33,21 +37,28 @@ void StepsEditor::deleteStepSlot()
     }
 }
 
-void StepsEditor::addStep(QString desc)
+void StepsEditor::addStep(QString desc, QString photoPath)
 {
     QHBoxLayout *layout = new QHBoxLayout();
-    QLabel *photo = new QLabel();
-    photo->setText("Фото шага");
+    DropLabel *photo = new DropLabel();
+    if(!photoPath.isEmpty()){
+        photo->setPixmap(QPixmap("img/" + photoPath));
+    }
+    else{
+        photo->setPixmap(QPixmap(":/ico/ico/camera.png"));
+    }
+
     QSize size;
     size.setWidth(150);
-    size.setHeight(150);
+    size.setHeight(125);
     photo->setMinimumSize(size);
     photo->setMaximumSize(size);
     photo->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     photo->setFrameShape(QFrame::Panel);
-    QLineEdit *stepEdit = new QLineEdit();
+    photo->setObjectName("photoLabel");
+    QPlainTextEdit *stepEdit = new QPlainTextEdit();
     stepEdit->setPlaceholderText("Описание шага");
-    stepEdit->setText(desc);
+    stepEdit->setPlainText(desc);
     QPushButton *deleteButton = new QPushButton();
     deleteButton->setText("Удалить");
     connect(deleteButton,SIGNAL(clicked()),this,SLOT(deleteStepSlot()));
@@ -73,18 +84,27 @@ void StepsEditor::deleteStepAt(int index)
 void StepsEditor::on_saveButton_clicked()
 {
     QSqlQuery query;
+    deleteFrom("steps","recipe_id",QString::number(recipe_id));
     for(int i=0;i<ui->stepList->count();i++){
         QHBoxLayout *layout = (QHBoxLayout*)ui->stepList->itemAt(i);
-        QLineEdit *descEdit = (QLineEdit*)layout->itemAt(1)->widget();
-        QString desc = descEdit->text();
-        bool ok = query.prepare("INSERT INTO steps (description, number, recipe_id)"
-                                "VALUES (:desc, :num, :id);");
+        DropLabel *photoLabel = (DropLabel*)layout->itemAt(0)->widget();
+        QString photo = photoLabel->filename;
+        if(!photo.isEmpty()){
+            photo = addIdToPhoto(photo,recipe_id);
+            QImage image(photoLabel->path);
+            image.save("img/" + photo);
+        }
+        QPlainTextEdit *descEdit = (QPlainTextEdit*)layout->itemAt(1)->widget();
+        QString desc = descEdit->toPlainText();
+        bool ok = query.prepare("INSERT INTO steps (description, number, recipe_id, photo)"
+                                "VALUES (:desc, :num, :id, :photo);");
         if(!ok){
             qDebug()<<query.lastError();
         }
         query.bindValue(":desc",desc);
         query.bindValue(":num",i+1);
         query.bindValue(":id",recipe_id);
+        query.bindValue(":photo",photo);
         ok = query.exec();
         if(!ok){
             qDebug()<<query.lastError();
@@ -100,7 +120,7 @@ void StepsEditor::setSteps(int recipe_id)
     }
     this->recipe_id = recipe_id;
     QSqlQuery query;
-    bool ok = query.prepare("SELECT description FROM steps WHERE recipe_id = :id");
+    bool ok = query.prepare("SELECT description, photo FROM steps WHERE recipe_id = :id");
     if(!ok){
         qDebug()<<query.lastError();
     }
@@ -110,7 +130,7 @@ void StepsEditor::setSteps(int recipe_id)
         qDebug()<<query.lastError();
     }
     while(query.next()){
-        addStep(query.value(0).toString());
+        addStep(query.value(0).toString(),query.value(1).toString());
     }
     if(ui->stepList->count() == 0){
         addStep();

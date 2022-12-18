@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/ico">
+        <file>ico/edit.png</file>
+        <file>ico/trash.png</file>
+        <file>ico/camera.png</file>
+        <file>ico/recipe book.png</file>
+        <file>ico/load screen.png</file>
+    </qresource>
+    <qresource prefix="/style">
+        <file>style.qss</file>
+    </qresource>
+    <qresource prefix="/help">
+        <file>help/index.html</file>
+        <file>help/search bar.png</file>
+        <file>help/recipe.png</file>
+        <file>help/steps.png</file>
+        <file>help/search.html</file>
+        <file>help/add.html</file>
+        <file>help/recipe editor.png</file>
+        <file>help/steps editor.png</file>
+    </qresource>
+</RCC>

@@ -6,6 +6,7 @@
 #include <QListWidgetItem>
 #include "recipeeditor.h"
 #include "recipeviewer.h"
+#include "help.h"
 
 namespace Ui {
 class RecipeBook;
@@ -24,6 +25,7 @@ private:
     QSqlDatabase db;
     RecipeEditor *editor;
     RecipeViewer *viewer;
+    Help *help;
 
 private slots:
     void search(QString str);

@@ -23,7 +23,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -32,6 +31,7 @@ QT_BEGIN_NAMESPACE
 class Ui_RecipeBook
 {
 public:
+    QAction *helpAction;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QLineEdit *searchBar;
@@ -42,7 +42,6 @@ public:
     QPushButton *addRecipeButton;
     QMenuBar *menuBar;
     QMenu *menu;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *RecipeBook)
@@ -50,6 +49,12 @@ public:
         if (RecipeBook->objectName().isEmpty())
             RecipeBook->setObjectName(QStringLiteral("RecipeBook"));
         RecipeBook->resize(655, 510);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/ico/ico/recipe book.png"), QSize(), QIcon::Normal, QIcon::Off);
+        RecipeBook->setWindowIcon(icon);
+        RecipeBook->setStyleSheet(QStringLiteral(""));
+        helpAction = new QAction(RecipeBook);
+        helpAction->setObjectName(QStringLiteral("helpAction"));
         centralWidget = new QWidget(RecipeBook);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -78,15 +83,24 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         recipeList = new QListWidget(centralWidget);
+        QBrush brush(QColor(0, 0, 0, 255));
+        brush.setStyle(Qt::NoBrush);
+        QBrush brush1(QColor(255, 189, 55, 255));
+        brush1.setStyle(Qt::SolidPattern);
+        QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(recipeList);
+        __qlistwidgetitem->setBackground(brush1);
+        __qlistwidgetitem->setForeground(brush);
         recipeList->setObjectName(QStringLiteral("recipeList"));
-        recipeList->setIconSize(QSize(150, 150));
-        recipeList->setProperty("isWrapping", QVariant(false));
-        recipeList->setWordWrap(true);
+        recipeList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        recipeList->setIconSize(QSize(150, 125));
+        recipeList->setHorizontalScrollMode(QAbstractItemView::ScrollPerItem);
+        recipeList->setWordWrap(false);
 
         verticalLayout->addWidget(recipeList);
 
         addRecipeButton = new QPushButton(centralWidget);
         addRecipeButton->setObjectName(QStringLiteral("addRecipeButton"));
+        addRecipeButton->setStyleSheet(QStringLiteral(""));
 
         verticalLayout->addWidget(addRecipeButton);
 
@@ -97,14 +111,12 @@ public:
         menu = new QMenu(menuBar);
         menu->setObjectName(QStringLiteral("menu"));
         RecipeBook->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(RecipeBook);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        RecipeBook->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(RecipeBook);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         RecipeBook->setStatusBar(statusBar);
 
         menuBar->addAction(menu->menuAction());
+        menu->addAction(helpAction);
 
         retranslateUi(RecipeBook);
 
@@ -113,12 +125,25 @@ public:
 
     void retranslateUi(QMainWindow *RecipeBook)
     {
-        RecipeBook->setWindowTitle(QApplication::translate("RecipeBook", "\320\232\320\275\320\270\320\263\320\260 \321\200\320\265\321\206\320\265\320\277\321\202\320\276\320\262", nullptr));
+        RecipeBook->setWindowTitle(QApplication::translate("RecipeBook", "\320\234\320\276\320\270 \321\200\320\265\321\206\320\265\320\277\321\202\321\213", nullptr));
+        helpAction->setText(QApplication::translate("RecipeBook", "\320\241\320\277\321\200\320\260\320\262\320\272\320\260", nullptr));
+#ifndef QT_NO_SHORTCUT
+        helpAction->setShortcut(QApplication::translate("RecipeBook", "F1", nullptr));
+#endif // QT_NO_SHORTCUT
         searchBar->setPlaceholderText(QApplication::translate("RecipeBook", "\320\237\320\276\320\270\321\201\320\272...", nullptr));
         searchByNameRB->setText(QApplication::translate("RecipeBook", "\320\237\320\276 \320\275\320\260\320\267\320\262\320\260\320\275\320\270\321\216", nullptr));
         searchByIngredientRB->setText(QApplication::translate("RecipeBook", "\320\237\320\276 \320\270\320\275\320\263\321\200\320\265\320\264\320\270\320\265\320\275\321\202\321\203", nullptr));
+
+        const bool __sortingEnabled = recipeList->isSortingEnabled();
+        recipeList->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem = recipeList->item(0);
+        ___qlistwidgetitem->setText(QApplication::translate("RecipeBook", "Test\n"
+"\n"
+"Test desc", nullptr));
+        recipeList->setSortingEnabled(__sortingEnabled);
+
         addRecipeButton->setText(QApplication::translate("RecipeBook", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
-        menu->setTitle(QApplication::translate("RecipeBook", "\320\241\320\277\321\200\320\260\320\262\320\272\320\260", nullptr));
+        menu->setTitle(QApplication::translate("RecipeBook", "\320\237\320\276\320\274\320\276\321\211\321\214", nullptr));
     } // retranslateUi
 
 };

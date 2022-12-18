@@ -32,14 +32,14 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *recipeNameLabel;
     QLabel *recipeDescriptionLabel;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *recipeEditButton;
+    QPushButton *recipeDeleteButton;
     QSpacerItem *verticalSpacer_2;
     QLabel *label_4;
     QVBoxLayout *ingredientsList;
     QSpacerItem *verticalSpacer;
     QPushButton *toStepsViewerButton;
-    QHBoxLayout *horizontalLayout_2;
-    QPushButton *recipeEditButton;
-    QPushButton *recipeDeleteButton;
 
     void setupUi(QWidget *RecipeViewer)
     {
@@ -51,15 +51,21 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(RecipeViewer->sizePolicy().hasHeightForWidth());
         RecipeViewer->setSizePolicy(sizePolicy);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/ico/ico/recipe book.png"), QSize(), QIcon::Normal, QIcon::Off);
+        RecipeViewer->setWindowIcon(icon);
         verticalLayout_2 = new QVBoxLayout(RecipeViewer);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         photoLabel = new QLabel(RecipeViewer);
         photoLabel->setObjectName(QStringLiteral("photoLabel"));
-        photoLabel->setMinimumSize(QSize(150, 150));
-        photoLabel->setMaximumSize(QSize(150, 150));
+        photoLabel->setMinimumSize(QSize(150, 125));
+        photoLabel->setMaximumSize(QSize(150, 125));
+        photoLabel->setAcceptDrops(false);
         photoLabel->setFrameShape(QFrame::Panel);
+        photoLabel->setPixmap(QPixmap(QString::fromUtf8(":/ico/ico/camera.png")));
+        photoLabel->setScaledContents(false);
         photoLabel->setAlignment(Qt::AlignCenter);
         photoLabel->setMargin(0);
 
@@ -85,6 +91,27 @@ public:
 
 
         verticalLayout_2->addLayout(horizontalLayout);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        recipeEditButton = new QPushButton(RecipeViewer);
+        recipeEditButton->setObjectName(QStringLiteral("recipeEditButton"));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/ico/ico/edit.png"), QSize(), QIcon::Normal, QIcon::Off);
+        recipeEditButton->setIcon(icon1);
+
+        horizontalLayout_2->addWidget(recipeEditButton);
+
+        recipeDeleteButton = new QPushButton(RecipeViewer);
+        recipeDeleteButton->setObjectName(QStringLiteral("recipeDeleteButton"));
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/ico/ico/trash.png"), QSize(), QIcon::Normal, QIcon::Off);
+        recipeDeleteButton->setIcon(icon2);
+
+        horizontalLayout_2->addWidget(recipeDeleteButton);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
 
         verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Maximum);
 
@@ -112,21 +139,6 @@ public:
 
         verticalLayout_2->addWidget(toStepsViewerButton);
 
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        recipeEditButton = new QPushButton(RecipeViewer);
-        recipeEditButton->setObjectName(QStringLiteral("recipeEditButton"));
-
-        horizontalLayout_2->addWidget(recipeEditButton);
-
-        recipeDeleteButton = new QPushButton(RecipeViewer);
-        recipeDeleteButton->setObjectName(QStringLiteral("recipeDeleteButton"));
-
-        horizontalLayout_2->addWidget(recipeDeleteButton);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_2);
-
 
         retranslateUi(RecipeViewer);
 
@@ -136,13 +148,13 @@ public:
     void retranslateUi(QWidget *RecipeViewer)
     {
         RecipeViewer->setWindowTitle(QApplication::translate("RecipeViewer", "\320\237\321\200\320\276\321\201\320\274\320\276\321\202\321\200 \320\261\320\273\321\216\320\264\320\260", nullptr));
-        photoLabel->setText(QApplication::translate("RecipeViewer", "\320\244\320\276\321\202\320\276 \321\200\320\265\321\206\320\265\320\277\321\202\320\260", nullptr));
+        photoLabel->setText(QString());
         recipeNameLabel->setText(QApplication::translate("RecipeViewer", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265 \321\200\320\265\321\206\320\265\320\277\321\202\320\260", nullptr));
         recipeDescriptionLabel->setText(QApplication::translate("RecipeViewer", "\320\236\320\277\320\270\321\201\320\260\320\275\320\270\320\265 \321\200\320\265\321\206\320\265\320\277\321\202\320\260", nullptr));
-        label_4->setText(QApplication::translate("RecipeViewer", "\320\230\320\275\320\263\321\200\320\265\320\264\320\270\320\265\320\275\321\202\321\213", nullptr));
-        toStepsViewerButton->setText(QApplication::translate("RecipeViewer", "\320\237\320\265\321\200\320\265\320\271\321\202\320\270 \320\272 \320\277\321\200\320\270\320\263\320\276\321\202\320\276\320\262\320\273\320\265\320\275\320\270\321\216", nullptr));
         recipeEditButton->setText(QApplication::translate("RecipeViewer", "\320\240\320\265\320\264\320\260\320\272\321\202\320\270\321\200\320\276\320\262\320\260\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
         recipeDeleteButton->setText(QApplication::translate("RecipeViewer", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
+        label_4->setText(QApplication::translate("RecipeViewer", "\320\230\320\275\320\263\321\200\320\265\320\264\320\270\320\265\320\275\321\202\321\213", nullptr));
+        toStepsViewerButton->setText(QApplication::translate("RecipeViewer", "\320\237\320\265\321\200\320\265\320\271\321\202\320\270 \320\272 \320\277\321\200\320\270\320\263\320\276\321\202\320\276\320\262\320\273\320\265\320\275\320\270\321\216", nullptr));
     } // retranslateUi
 
 };

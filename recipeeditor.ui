@@ -11,27 +11,46 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Редактор рецептов</string>
+   <string>Редактировать рецепт</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <property name="windowIcon">
+   <iconset resource="src.qrc">
+    <normaloff>:/ico/ico/recipe book.png</normaloff>:/ico/ico/recipe book.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="photoLabel">
+      <widget class="DropLabel" name="photoLabel">
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>0</height>
+         <width>150</width>
+         <height>100</height>
         </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>150</width>
+         <height>125</height>
+        </size>
+       </property>
+       <property name="acceptDrops">
+        <bool>true</bool>
        </property>
        <property name="frameShape">
         <enum>QFrame::Panel</enum>
        </property>
        <property name="text">
-        <string>Загрузить фото</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="src.qrc">:/ico/ico/camera.png</pixmap>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
        <property name="margin">
-        <number>50</number>
+        <number>0</number>
        </property>
       </widget>
      </item>
@@ -47,7 +66,7 @@
        <item>
         <widget class="QPlainTextEdit" name="descriptionEdit">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -85,7 +104,7 @@
         <x>0</x>
         <y>0</y>
         <width>660</width>
-        <height>163</height>
+        <height>310</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -110,28 +129,34 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="addIngredientButton">
-     <property name="text">
-      <string>Добавить ингредиент</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="stepsEditButton">
-     <property name="text">
-      <string>Перейти к приготовлению</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="saveButton">
-     <property name="text">
-      <string>Сохранить изменения</string>
-     </property>
-    </widget>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QPushButton" name="addIngredientButton">
+       <property name="text">
+        <string>Добавить ингредиент</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="stepsEditButton">
+       <property name="text">
+        <string>Сохранить и перейти к приготовлению</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
- <resources/>
+ <customwidgets>
+  <customwidget>
+   <class>DropLabel</class>
+   <extends>QLabel</extends>
+   <header>droplabel.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="src.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -16,12 +16,15 @@ class RecipeViewer : public QWidget
 public:
     explicit RecipeViewer(QWidget *parent = 0);
     ~RecipeViewer();
+    void setEditor(RecipeEditor *editor);
 
 private:
     Ui::RecipeViewer *ui;
     QString recipe;
+    QString photo;
     RecipeEditor *editor;
     StepsViewer *sViewer;
+    void deletePhotos(int recipe_id);
 
 public slots:
     void setRecipe(QString str);

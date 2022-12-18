@@ -28,7 +28,7 @@ public slots:
 
 private:
     Ui::StepsEditor *ui;
-    void addStep(QString desc = "");
+    void addStep(QString desc = "", QString photoPath = "");
     void deleteStepAt(int index);
     QVector<QPushButton*> buttons;
     int recipe_id;

@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Просмотр блюда</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="src.qrc">
+    <normaloff>:/ico/ico/recipe book.png</normaloff>:/ico/ico/recipe book.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -27,20 +31,29 @@
        <property name="minimumSize">
         <size>
          <width>150</width>
-         <height>150</height>
+         <height>125</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>150</width>
-         <height>150</height>
+         <height>125</height>
         </size>
+       </property>
+       <property name="acceptDrops">
+        <bool>false</bool>
        </property>
        <property name="frameShape">
         <enum>QFrame::Panel</enum>
        </property>
        <property name="text">
-        <string>Фото рецепта</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="src.qrc">:/ico/ico/camera.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -76,6 +89,32 @@
         </widget>
        </item>
       </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="recipeEditButton">
+       <property name="text">
+        <string>Редактировать рецепт</string>
+       </property>
+       <property name="icon">
+        <iconset resource="src.qrc">
+         <normaloff>:/ico/ico/edit.png</normaloff>:/ico/ico/edit.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="recipeDeleteButton">
+       <property name="text">
+        <string>Удалить рецепт</string>
+       </property>
+       <property name="icon">
+        <iconset resource="src.qrc">
+         <normaloff>:/ico/ico/trash.png</normaloff>:/ico/ico/trash.png</iconset>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -130,26 +169,10 @@
      </property>
     </widget>
    </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QPushButton" name="recipeEditButton">
-       <property name="text">
-        <string>Редактировать рецепт</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="recipeDeleteButton">
-       <property name="text">
-        <string>Удалить рецепт</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="src.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -30,18 +30,30 @@ SOURCES += \
     recipeeditor.cpp \
     recipeviewer.cpp \
     stepseditor.cpp \
-    stepsviewer.cpp
+    stepsviewer.cpp \
+    droplabel.cpp \
+    help.cpp
 
 HEADERS += \
         recipebook.h \
     recipeeditor.h \
     recipeviewer.h \
     stepseditor.h \
-    stepsviewer.h
+    stepsviewer.h \
+    droplabel.h \
+    functions.h \
+    help.h
 
 FORMS += \
         recipebook.ui \
     recipeeditor.ui \
     recipeviewer.ui \
     stepseditor.ui \
-    stepsviewer.ui
+    stepsviewer.ui \
+    help.ui
+
+RESOURCES += \
+    src.qrc
+
+DISTFILES += \
+    style.qss

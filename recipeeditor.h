@@ -32,8 +32,15 @@ private:
     Ui::RecipeEditor *ui;
     QVector<QPushButton*> buttons;
     QString oldName;
+    QString oldPhoto;
     StepsEditor *sEditor;
+    QCompleter *completer;
     void addIngredient(QString name = "", QString quantity = "");
+    void saveName(QString name, QString description);
+    void savePhoto(QString photo, int recipe_id);
+    void saveIngredient(QString name, QString quantity, int recipe_id);
+    QStringList getIngredients();
+    void refreshCompleter();
 
 signals:
     void recipeChanged();

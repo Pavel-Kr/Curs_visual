@@ -41,6 +41,9 @@ public:
         if (StepsEditor->objectName().isEmpty())
             StepsEditor->setObjectName(QStringLiteral("StepsEditor"));
         StepsEditor->resize(738, 517);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/ico/ico/recipe book.png"), QSize(), QIcon::Normal, QIcon::Off);
+        StepsEditor->setWindowIcon(icon);
         gridLayout = new QGridLayout(StepsEditor);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         addStepButton = new QPushButton(StepsEditor);
@@ -87,7 +90,7 @@ public:
 
     void retranslateUi(QWidget *StepsEditor)
     {
-        StepsEditor->setWindowTitle(QApplication::translate("StepsEditor", "Form", nullptr));
+        StepsEditor->setWindowTitle(QApplication::translate("StepsEditor", "\320\240\320\265\320\264\320\260\320\272\321\202\320\270\321\200\320\276\320\262\320\260\321\202\321\214 \321\200\320\265\321\206\320\265\320\277\321\202", nullptr));
         addStepButton->setText(QApplication::translate("StepsEditor", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\210\320\260\320\263", nullptr));
         saveButton->setText(QApplication::translate("StepsEditor", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \320\270\320\267\320\274\320\265\320\275\320\265\320\275\320\270\321\217", nullptr));
     } // retranslateUi
