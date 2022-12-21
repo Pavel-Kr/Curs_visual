@@ -23,6 +23,11 @@ QPushButton:pressed {
     border-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0, stop:0 rgba(180, 80, 5, 255), stop:1 rgba(220, 160, 110, 255));
 }
 
+QPushButton:disabled {
+    background-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0, stop:0 rgba(205, 148, 99, 255), stop:1 rgba(243, 210, 176, 255));
+    border-color: qlineargradient(spread:pad, x1:0.5, y1:1, x2:0.5, y2:0, stop:0 rgba(205, 148, 99, 255), stop:1 rgba(243, 210, 176, 255));
+}
+
 QLineEdit, QPlainTextEdit {
     border-width: 1px;
     border-style: solid;
